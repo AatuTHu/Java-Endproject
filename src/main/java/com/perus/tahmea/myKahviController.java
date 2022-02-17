@@ -4,13 +4,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 public class myKahviController {
 
     List<Students> studentsList = new ArrayList<>();
     List<Courses> coursesList = new ArrayList<>();
-    List<Object> StoC = new ArrayList<Object>();
+    List<StudentToCourse> StoC = new ArrayList<>();
 
     @GetMapping("home")
     public String hello(){
@@ -68,10 +69,16 @@ public class myKahviController {
         try {
             int StuId = Integer.parseInt(Student_Id);
             int CouId = Integer.parseInt(Course_Id);
-            StoC.add(studentsList.get(StuId));
-            StoC.add(coursesList.get(CouId));
+
+            StudentToCourse e = new StudentToCourse(
+                    studentsList.get(StuId-1),
+                    coursesList.get(CouId-1)
+            );
+            StoC.add(e);
+
+
         } catch (Exception e) {
-            return "You have made an error";
+            return e.getMessage();
         }
 
         return "Student added to course";
@@ -79,7 +86,7 @@ public class myKahviController {
     }
 
     @GetMapping("getStoC")
-    public List<Object> getStoc() {
+    public List<StudentToCourse> getStoc() {
         return StoC;
     }
 
