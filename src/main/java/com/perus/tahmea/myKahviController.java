@@ -19,7 +19,7 @@ public class myKahviController {
     }
 
     @PostMapping("addStudents")
-    public String addStudent(@RequestParam String fname, @RequestParam String lname, @RequestParam String StudentId){
+    public String addStudents(@RequestParam String fname, @RequestParam String lname, @RequestParam String StudentId){
 
         try {
             int id = Integer.parseInt(StudentId);
@@ -36,13 +36,24 @@ public class myKahviController {
         }
     }
 
+    @PostMapping("deleteStudents")
+    public String deleteStudents(@RequestParam String StudentId) {
+        try {
+            int id = Integer.parseInt(StudentId);
+            studentsList.remove(id - 1);
+        }catch (Exception e) {
+            return "You have made an error";
+        }
+        return "Succes";
+    }
+
     @GetMapping("Students")
     public List<Students> getStudents(){
         return studentsList;
     }
 
     @PostMapping("addCourses")
-    public String addCourse(@RequestParam String course, @RequestParam String teacher, @RequestParam String CourseId) {
+    public String addCourses(@RequestParam String course, @RequestParam String teacher, @RequestParam String CourseId) {
 
         try {
             int id = Integer.parseInt(CourseId);
@@ -56,6 +67,19 @@ public class myKahviController {
         }catch (Exception e) {
             return "no can do";
         }
+    }
+
+    @PostMapping("deleteCourses")
+    public String deleteCourses(@RequestParam String CourseId) {
+
+        try {
+            int id = Integer.parseInt(CourseId);
+            coursesList.remove(id-1);
+        } catch (Exception e) {
+            return "You have made an error";
+        }
+
+        return "Succes";
     }
 
     @GetMapping("Courses")
@@ -75,7 +99,6 @@ public class myKahviController {
                     coursesList.get(CouId-1)
             );
             StoC.add(e);
-
 
         } catch (Exception e) {
             return e.getMessage();

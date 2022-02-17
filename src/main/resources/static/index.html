@@ -44,6 +44,24 @@
         </div>
 
         <div class="containerItems">
+            <h2>Delete Students</h2>
+            <form method="post" action="http://localhost:8080/deleteStudents">
+                <label>StudentId:</label><br>
+                <input type="text" name="StudentId"><br>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+
+        <div class="containerItems">
+            <h2>Delete Courses</h2>
+            <form method="post" action="http://localhost:8080/deleteCourses">
+                <label>CourseId:</label><br>
+                <input type="text" name="CourseId"><br>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+
+        <div class="containerItems">
             <h2>Get info by clicking</h2>
             <form action="http://localhost:8080/Students">
                 <input type="submit" value="get Students" />
