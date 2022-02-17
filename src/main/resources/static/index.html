@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Aatun javasivu</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="maincontainer">
+        <div class="containerItems">
+                <h2>Add Students</h2>
+                <form method="post" action="http://localhost:8080/addStudents">
+                    <label>First name:</label><br>
+                    <input type="text" name="fname"><br>
+                    <label>Last name:</label><br>
+                    <input type="text" name="lname"><br>
+                    <label>StudentId:</label><br>
+                    <input type="text" name="StudentId"><br><br>
+                    <input type="submit" value="Submit">
+                </form>
+        </div>
+
+        <div class="containerItems">
+            <h2>Add Courses</h2>
+            <form method="post" action="http://localhost:8080/addCourses">
+                <label>Course:</label><br>
+                <input type="text" name="course"><br>
+                <label>Teacher:</label><br>
+                <input type="text" name="teacher"><br>
+                <label>CourseId:</label><br>
+                <input type="text" name="CourseId"/><br><br>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+
+        <div class="containerItems">
+            <h2>Add Students to Courses</h2>
+            <form method="post" action="http://localhost:8080/StoC">
+                <label>CourseId:</label><br>
+                <input type="text" name="Course_Id"><br>
+                <label>StudentId:</label><br>
+                <input type="text" name="Student_Id"><br><br>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+
+        <div class="containerItems">
+            <h2>Get info by clicking</h2>
+            <form action="http://localhost:8080/Students">
+                <input type="submit" value="get Students" />
+            </form>
+            <form action="http://localhost:8080/Courses">
+                <input type="submit" value="get Courses" />
+            </form>
+        </div>
+
+
+
+</div>
+
+</body>
+</html>

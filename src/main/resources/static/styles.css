@@ -1,0 +1,16 @@
+.maincontainer{
+    display: grid;
+    grid-template-columns: 25% 25% 25%;
+    padding: 50px;
+    justify-content:center;
+    
+}
+
+.containerItems {
+    font-size: 30px;
+    border: solid 5px black;
+    width: 400px;
+    padding: 10px;
+    margin-right: 50px;
+    margin-bottom: 50px;
+}
