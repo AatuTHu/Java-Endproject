@@ -1,5 +1,8 @@
 package com.perus.tahmea;
 
+import java.util.List;
+import java.util.Map;
+
 public class Students {
 
     private String fname;
@@ -11,6 +14,10 @@ public class Students {
         this.fname = fname;
         this.lname = lname;
         this.StudentId = studentId;
+    }
+
+    public Students(){
+
     }
 
 
@@ -25,4 +32,5 @@ public class Students {
     public int getStudentId() {
         return StudentId;
     }
+
 }
