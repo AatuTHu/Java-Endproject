@@ -9,6 +9,10 @@ import java.util.List;
 @RestController
 public class myKahviController {
 
+    String redirect = "<a href='http://localhost:8080'><button> Return to main page</button></a>";
+    String successMsg = "<h1>Addition was successful </h1>";
+    String errorMsg = "<h1>Something went wrong  </h1>";
+    String deleteMSG = "<h1>Deletion was successful</h1>";
     List<Students> studentsList = new ArrayList<>();
     List<Courses> coursesList = new ArrayList<>();
     List<StudentToCourse> StoC = new ArrayList<>();
@@ -37,20 +41,23 @@ public class myKahviController {
             if (id > studentsList.size() && id < studentsList.size() + 2) {
                 Students S = new Students(fname, lname, id);
                 studentsList.add(S);
-                return "<h1>Student added</h1>";
+                return successMsg + redirect;
+
             } else {
-                return "No can do";
+                return errorMsg + redirect;
+
             }
 
         } catch (Exception e) {
-            return "no can do";
+            return "Id given could not be parsed or was not in chronological order"+ redirect;
+
         }
     }
 
     /**
      *
      * @param StudentId id is used to find who is going to be deleted
-     * @return succes or error
+     * @return success or error
      */
     @PostMapping("deleteStudents")
     public String deleteStudents(@RequestParam String StudentId) {
@@ -58,9 +65,10 @@ public class myKahviController {
             int id = Integer.parseInt(StudentId);
             studentsList.remove(id - 1);
         } catch (Exception e) {
-            return "You have made an error";
+            return errorMsg + redirect;
         }
-        return "Succes";
+        return deleteMSG + redirect;
+
     }
 
     /**
@@ -75,7 +83,7 @@ public class myKahviController {
             StudentString += "<h1>Lastname: </h1>" + e.getLname() + "<br>";
             StudentString += "<h1>StudentId: </h1>" + e.getStudentId() + "<br><br>";
         }
-        return StudentString;
+        return StudentString + redirect;
     }
 
     /**
@@ -93,12 +101,12 @@ public class myKahviController {
             if (id > coursesList.size() && id < coursesList.size() + 2) {
                 Courses C = new Courses(course, teacher, id);
                 coursesList.add(C);
-                return "<h1>Course added</h1>";
+                return successMsg + redirect;
             } else {
-                return "No can do";
+                return errorMsg + redirect;
             }
         } catch (Exception e) {
-            return "no can do";
+            return "Id given could not be parsed or was not in chronological order" + redirect;
         }
     }
 
@@ -114,10 +122,10 @@ public class myKahviController {
             int id = Integer.parseInt(CourseId);
             coursesList.remove(id - 1);
         } catch (Exception e) {
-            return "You have made an error";
+            return errorMsg + redirect;
         }
 
-        return "Succes";
+        return deleteMSG + redirect;
     }
 
     /**
@@ -132,7 +140,7 @@ public class myKahviController {
             CourseString += "<h1>Teacher name: </h1>" + e.getTeacher() + "<br>";
             CourseString += "<h1>Course id: </h1>" + e.getCourseId() + "<br><br>";
         }
-        return CourseString;
+        return CourseString + redirect;
     }
 
     /**
@@ -141,8 +149,8 @@ public class myKahviController {
      * @param Student_Id which student
      * @return success or error
      */
-    @PostMapping("StudentstoCourses")
-    public String StudentstoCourses(@RequestParam String Course_Id, @RequestParam String Student_Id) {
+    @PostMapping("StudentsToCourses")
+    public String StudentsToCourses(@RequestParam String Course_Id, @RequestParam String Student_Id) {
 
         try {
             int StuId = Integer.parseInt(Student_Id);
@@ -155,10 +163,10 @@ public class myKahviController {
             StoC.add(e);
 
         } catch (Exception e) {
-            return e.getMessage();
+            return errorMsg + redirect;
         }
 
-        return "Student added to course";
+        return successMsg + redirect;
 
     }
 
@@ -166,7 +174,7 @@ public class myKahviController {
      *
      * @return list data
      */
-    @GetMapping("getStudentstoCourses")
+    @GetMapping("getStudentsToCourses")
     public List<StudentToCourse> getStudentstoCourses() {
         return StoC;
     }

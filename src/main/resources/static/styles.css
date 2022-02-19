@@ -1,16 +1,49 @@
+.titleContainer{
+    display: flex;  
+    font-size: 30px;
+    font-weight: bold;
+    justify-content: center;
+}
+
+.titleItem{
+    padding: 10px;
+    background-color: rgb(209, 144, 40);
+    border: 3px solid;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+
 .mainContainer{
     display: grid;
     grid-template-columns: 25% 25% 25%;
     padding: 50px;
     justify-content:center;
+    background-image: url("./image.png");
+    background-repeat: no-repeat;
+    background-size: cover;
     
 }
 
 .containerItems {
-    font-size: 30px;
+    font-size: 25px;
     border: solid 5px black;
     width: 400px;
     padding: 10px;
     margin-right: 50px;
     margin-bottom: 50px;
+    background-color: rgba(206, 205, 205, 0.493);
+   
+}
+
+.containerItems h2 {
+    background-color: rgb(209, 144, 40);
+    text-align: center;
+    padding-top: 3px;
+    border: solid 2px black;
+}
+
+.containerItems form {
+    text-align: center;
+    font-weight: bold;
 }

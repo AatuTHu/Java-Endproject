@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div class = "titleContainer"><div class = "titleItem">Java Endproject</div></div>
     <div class="mainContainer">
         <div class="containerItems">
                 <h2>Add Students</h2>
@@ -34,7 +35,7 @@
 
         <div class="containerItems">
             <h2>Add Students to Courses</h2>
-            <form method="post" action="http://localhost:8080/StudentstoCourses">
+            <form method="post" action="http://localhost:8080/StudentsToCourses">
                 <label>CourseId:</label><br>
                 <input type="text" name="Course_Id"><br>
                 <label>StudentId:</label><br>
@@ -62,14 +63,14 @@
         </div>
 
         <div class="containerItems">
-            <h2>Get info by clicking</h2>
+            <h2>Get info</h2>
             <form action="http://localhost:8080/Students">
                 <input type="submit" value="get Students" />
             </form>
             <form action="http://localhost:8080/Courses">
                 <input type="submit" value="get Courses" />
             </form>
-            <form action="http://localhost:8080/getStudentstoCourses">
+            <form action="http://localhost:8080/getStudentsToCourses">
                 <input type="submit" value="See Students on Courses" />
             </form>
         </div>
