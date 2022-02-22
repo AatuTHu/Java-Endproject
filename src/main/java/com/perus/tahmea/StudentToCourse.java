@@ -1,19 +1,22 @@
 package com.perus.tahmea;
 
 public class StudentToCourse {
-    private Object Students;
-    private Object Courses;
+    private String Students;
+    private String Courses;
 
-    public StudentToCourse(Object students, Object courses) {
+
+    public StudentToCourse(String students, String courses) {
         Students = students;
         Courses = courses;
+
     }
 
-    public Object getStudents() {
+    public String getStudents() {
         return Students;
     }
 
-    public Object getCourses() {
+    public String getCourses() {
         return Courses;
     }
+
 }

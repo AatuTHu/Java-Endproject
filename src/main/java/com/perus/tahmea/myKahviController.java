@@ -13,6 +13,7 @@ public class myKahviController {
     String successMsg = "<h1>Addition was successful </h1>";
     String errorMsg = "<h1>Something went wrong  </h1>";
     String deleteMSG = "<h1>Deletion was successful</h1>";
+    String parseError = "<h1>Id given could not be parsed or was not in chronological order</h1>";
     List<Students> studentsList = new ArrayList<>();
     List<Courses> coursesList = new ArrayList<>();
     List<StudentToCourse> StoC = new ArrayList<>();
@@ -49,7 +50,7 @@ public class myKahviController {
             }
 
         } catch (Exception e) {
-            return "Id given could not be parsed or was not in chronological order"+ redirect;
+            return parseError+ redirect;
 
         }
     }
@@ -106,7 +107,7 @@ public class myKahviController {
                 return errorMsg + redirect;
             }
         } catch (Exception e) {
-            return "Id given could not be parsed or was not in chronological order" + redirect;
+            return parseError + redirect;
         }
     }
 
@@ -156,11 +157,14 @@ public class myKahviController {
             int StuId = Integer.parseInt(Student_Id);
             int CouId = Integer.parseInt(Course_Id);
 
-            StudentToCourse e = new StudentToCourse(
-                    studentsList.get(StuId - 1),
-                    coursesList.get(CouId - 1)
-            );
-            StoC.add(e);
+                     Students S  = studentsList.get(StuId - 1);
+                     Courses C = coursesList.get(CouId - 1);
+
+                         String Palautus = S.getFname();
+                         String Palautus1 = C.getCourse();
+
+                         StudentToCourse F = new StudentToCourse(Palautus,Palautus1);
+                         StoC.add(F);
 
         } catch (Exception e) {
             return errorMsg + redirect;
@@ -172,11 +176,20 @@ public class myKahviController {
 
     /**
      *
-     * @return list data
+     * @return String data
      */
     @GetMapping("getStudentsToCourses")
-    public List<StudentToCourse> getStudentstoCourses() {
-        return StoC;
+    public String getStudentstoCourses() {
+
+        String CourseString = "";
+        for (StudentToCourse e : StoC) {
+            CourseString += "<h1>Student Name: </h1>" + e.getStudents() + "<br>";
+            CourseString += "<h1>Course name: </h1>" + e.getCourses() + "<br><br>";
+        }
+        return CourseString + redirect;
+
+
+
     }
 }
 
