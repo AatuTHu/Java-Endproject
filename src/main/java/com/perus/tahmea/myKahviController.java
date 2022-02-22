@@ -9,14 +9,10 @@ import java.util.List;
 @RestController
 public class myKahviController {
 
-    String redirect = "<a href='http://localhost:8080'><button> Return to main page</button></a>";
-    String successMsg = "<h1>Addition was successful </h1>";
-    String errorMsg = "<h1>Something went wrong  </h1>";
-    String deleteMSG = "<h1>Deletion was successful</h1>";
-    String parseError = "<h1>Id given could not be parsed or was not in chronological order</h1>";
-    List<Students> studentsList = new ArrayList<>();
-    List<Courses> coursesList = new ArrayList<>();
-    List<StudentToCourse> StoC = new ArrayList<>();
+    Courses C = new Courses();
+    Students S = new Students();
+    StudentToCourse StoC = new StudentToCourse();
+
 
     /**
      *
@@ -36,23 +32,7 @@ public class myKahviController {
      */
     @PostMapping("addStudents")
     public String addStudents(@RequestParam String fname, @RequestParam String lname, @RequestParam String StudentId) {
-
-        try {
-            int id = Integer.parseInt(StudentId);
-            if (id > studentsList.size() && id < studentsList.size() + 2) {
-                Students S = new Students(fname, lname, id);
-                studentsList.add(S);
-                return successMsg + redirect;
-
-            } else {
-                return errorMsg + redirect;
-
-            }
-
-        } catch (Exception e) {
-            return parseError+ redirect;
-
-        }
+        return S.SetStudents(fname,lname,StudentId);
     }
 
     /**
@@ -62,14 +42,7 @@ public class myKahviController {
      */
     @PostMapping("deleteStudents")
     public String deleteStudents(@RequestParam String StudentId) {
-        try {
-            int id = Integer.parseInt(StudentId);
-            studentsList.remove(id - 1);
-        } catch (Exception e) {
-            return errorMsg + redirect;
-        }
-        return deleteMSG + redirect;
-
+        return S.DeleteStudents(StudentId);
     }
 
     /**
@@ -78,13 +51,7 @@ public class myKahviController {
      */
     @GetMapping("Students")
     public String getStudents() {
-        String StudentString = "";
-        for (Students e : studentsList) {
-            StudentString += "<h1>Firstname: </h1>" + e.getFname() + "<br>";
-            StudentString += "<h1>Lastname: </h1>" + e.getLname() + "<br>";
-            StudentString += "<h1>StudentId: </h1>" + e.getStudentId() + "<br><br>";
-        }
-        return StudentString + redirect;
+        return S.GetStudents();
     }
 
     /**
@@ -96,19 +63,7 @@ public class myKahviController {
      */
     @PostMapping("addCourses")
     public String addCourses(@RequestParam String course, @RequestParam String teacher, @RequestParam String CourseId) {
-
-        try {
-            int id = Integer.parseInt(CourseId);
-            if (id > coursesList.size() && id < coursesList.size() + 2) {
-                Courses C = new Courses(course, teacher, id);
-                coursesList.add(C);
-                return successMsg + redirect;
-            } else {
-                return errorMsg + redirect;
-            }
-        } catch (Exception e) {
-            return parseError + redirect;
-        }
+        return C.setCourses(course,teacher,CourseId);
     }
 
     /**
@@ -118,15 +73,7 @@ public class myKahviController {
      */
     @PostMapping("deleteCourses")
     public String deleteCourses(@RequestParam String CourseId) {
-
-        try {
-            int id = Integer.parseInt(CourseId);
-            coursesList.remove(id - 1);
-        } catch (Exception e) {
-            return errorMsg + redirect;
-        }
-
-        return deleteMSG + redirect;
+       return C.deleteCourses(CourseId);
     }
 
     /**
@@ -135,13 +82,7 @@ public class myKahviController {
      */
     @GetMapping("Courses")
     public String getCourses() {
-        String CourseString = "";
-        for (Courses e : coursesList) {
-            CourseString += "<h1>Course Name: </h1>" + e.getCourse() + "<br>";
-            CourseString += "<h1>Teacher name: </h1>" + e.getTeacher() + "<br>";
-            CourseString += "<h1>Course id: </h1>" + e.getCourseId() + "<br><br>";
-        }
-        return CourseString + redirect;
+       return C.getCourses();
     }
 
     /**
@@ -152,26 +93,9 @@ public class myKahviController {
      */
     @PostMapping("StudentsToCourses")
     public String StudentsToCourses(@RequestParam String Course_Id, @RequestParam String Student_Id) {
-
-        try {
-            int StuId = Integer.parseInt(Student_Id);
-            int CouId = Integer.parseInt(Course_Id);
-
-                     Students S  = studentsList.get(StuId - 1);
-                     Courses C = coursesList.get(CouId - 1);
-
-                         String Palautus = S.getFname();
-                         String Palautus1 = C.getCourse();
-
-                         StudentToCourse F = new StudentToCourse(Palautus,Palautus1);
-                         StoC.add(F);
-
-        } catch (Exception e) {
-            return errorMsg + redirect;
-        }
-
-        return successMsg + redirect;
-
+      String Register =  S.GetStudentbyId(Student_Id);
+      Register += C.GetCourseById(Course_Id);
+        return StoC.registration(Register);
     }
 
     /**
@@ -179,17 +103,8 @@ public class myKahviController {
      * @return String data
      */
     @GetMapping("getStudentsToCourses")
-    public String getStudentstoCourses() {
-
-        String CourseString = "";
-        for (StudentToCourse e : StoC) {
-            CourseString += "<h1>Student Name: </h1>" + e.getStudents() + "<br>";
-            CourseString += "<h1>Course name: </h1>" + e.getCourses() + "<br><br>";
-        }
-        return CourseString + redirect;
-
-
-
+    public List getStudentstoCourses() {
+        return StoC.GetInfo();
     }
 }
 
