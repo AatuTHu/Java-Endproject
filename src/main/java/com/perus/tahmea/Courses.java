@@ -66,7 +66,7 @@ public class Courses extends ParamClass {
     public String GetCourseById(String courseId) {
         int id = Integer.parseInt(courseId);
         Courses C = coursesList.get(id-1);
-        String CourseName = "<br>Course Name: " + C.getCourse();
+        String CourseName = "<br>Course Name: " + C.getCourse() + "<br>";
         return  CourseName;
     }
 }

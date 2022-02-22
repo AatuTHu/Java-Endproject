@@ -1,9 +1,4 @@
 package com.perus.tahmea;
-
-import org.springframework.web.bind.annotation.RequestParam;
-
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +11,5 @@ public class ParamClass {
     String parseError = "<h1>Id given could not be parsed or was not in chronological order</h1>";
     List<Students> studentsList = new ArrayList<>();
     List<Courses> coursesList = new ArrayList<>();
-    List<String> StoC = new ArrayList<>();
-
 
 }

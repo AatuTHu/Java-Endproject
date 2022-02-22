@@ -2,6 +2,8 @@ package com.perus.tahmea;
 
 
 import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -92,7 +94,7 @@ public class myKahviController {
      * @return success or error
      */
     @PostMapping("StudentsToCourses")
-    public String StudentsToCourses(@RequestParam String Course_Id, @RequestParam String Student_Id) {
+    public String StudentsToCourses(@RequestParam String Course_Id, @RequestParam String Student_Id) throws IOException {
       String Register =  S.GetStudentbyId(Student_Id);
       Register += C.GetCourseById(Course_Id);
         return StoC.registration(Register);
@@ -103,7 +105,7 @@ public class myKahviController {
      * @return String data
      */
     @GetMapping("getStudentsToCourses")
-    public List getStudentstoCourses() {
+    public String getStudentstoCourses() {
         return StoC.GetInfo();
     }
 }
