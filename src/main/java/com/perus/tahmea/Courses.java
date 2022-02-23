@@ -9,17 +9,16 @@ import java.io.IOException;
  *
  *  setCourses() add one number to index file and creates a list of courses for later use
  *  getCourses() Returns data in readable form
- *  deleteCourses() works if everytime you use index that starts from beginning
+ *  deleteCourses() delete last addition
  *  GetCoursesById() return data to for the filerService
- *  CourseIdFiler() one, if not very bad way to do auto-incrementation for id. When you start and add new course you continue from the last id.
- *  did that only because I was bored.
+ *
  */
 
 public class Courses extends ParamClass {
     private String course;
     private String teacher;
     private String classRoom;
-    private int courseId;
+    private int courseId=0;
 
 
 
@@ -52,7 +51,7 @@ public class Courses extends ParamClass {
 
     public String setCourses(String course, String teacher, String classRoom) {
         try {
-                CourseIdFiler(String.valueOf(courseId));
+                courseId = courseId+1;
                 Courses C = new Courses(course, teacher,classRoom,courseId);
                 coursesList.add(C);
                 return successMsg + redirect;
@@ -72,13 +71,13 @@ public class Courses extends ParamClass {
         return CourseString + redirect;
     }
 
-    public String deleteCourses(int CourseId) {
+    public String deleteCourses() {
         try {
-            coursesList.remove(CourseId+1);
+            int index = coursesList.size();
+            coursesList.remove(index-1);
         } catch (Exception e) {
             return errorMsg + redirect;
         }
-
         return deleteMSG + redirect;
     }
 
@@ -94,21 +93,13 @@ public class Courses extends ParamClass {
                 return "";
             } else {
                 Courses C = coursesList.get(id-1);
-                return "Course Name: " + C.getCourse() + " <br> " + "Classroom: " + C.getClassRoom() +"<br>";
+                return "Course Name: " + C.getCourse() + "<br>" + "Classroom: " + C.getClassRoom() +"<br>";
             }
-
         } catch (Exception e) {
             return errorMsg + redirect;
         }
 
     }
 
-    private void CourseIdFiler(String id) throws IOException {
-        File Reader = new File("IdCourses.txt");
-            long checker = Reader.length();
-                courseId = Math.toIntExact(checker+1);
-                FileWriter Writer = new FileWriter("IdCourses.txt", true);
-            Writer.append(id);
-        Writer.close();
-    }
+
 }

@@ -19,7 +19,7 @@ public class myKahviController {
      */
     @GetMapping("home")
     public String hello() {
-        return "Hello to my javaEndgame";
+        return "Hello Reiska";
     }
 
     /**
@@ -36,14 +36,13 @@ public class myKahviController {
 
     /**
      *
-     * @param StudentId id is used to find who is going to be deleted
+     * Delete last index on list
      * @return success or error
      */
     @PostMapping("deleteStudents")
-    public String deleteStudents(@RequestParam String StudentId) {
-
+    public String deleteStudents() {
         try {
-            return S.DeleteStudents(Integer.parseInt(StudentId));
+            return S.DeleteStudents();
         } catch (Exception e) {
             return "Id could not be parsed or does not exist";
         }
@@ -72,13 +71,13 @@ public class myKahviController {
 
     /**
      *
-     * @param CourseId used to determinate which course is going to be deleted
+     * Delete last index
      * @return success or error
      */
     @PostMapping("deleteCourses")
-    public String deleteCourses(@RequestParam String CourseId) {
+    public String deleteCourses() {
         try {
-            return C.deleteCourses(Integer.parseInt(CourseId));
+            return C.deleteCourses();
         } catch (Exception e) {
             return "Id could not be parsed or does not exist";
         }

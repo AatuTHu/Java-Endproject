@@ -9,10 +9,9 @@ import java.io.IOException;
  *
  *  SetStudents() add one number to index file and creates a list of students for later use
  *  GetStudents() Returns data in readable form
- *  deleteStudents() works if everytime you use index that starts from beginning 1 -->
+ *  deleteStudents() Delete last addition
  *  GetStudentsById() return data to for the filerService
- *  StudentIdFiler() one, if not very bad way to do auto-incrementation for id. When you start and add new course you continue from the last id.
- *  did that only because I was bored but interested in how you could use files for this kind of stuff.
+ *
  */
 
 public class Students extends ParamClass {
@@ -20,7 +19,7 @@ public class Students extends ParamClass {
     private String fname;
     private String lname;
     private String address;
-    private int StudentId;
+    private int StudentId=0;
 
     public Students(String fname, String lname,String address, int studentId) {
         this.fname = fname;
@@ -52,7 +51,7 @@ public class Students extends ParamClass {
 
     public String SetStudents(String fname, String lname, String adress) {
         try {
-                StudentIdFiler(String.valueOf(StudentId));
+                StudentId = StudentId+1;
                 Students S = new Students(fname, lname,adress, StudentId);
                 studentsList.add(S);
                 return successMsg + redirect;
@@ -74,9 +73,11 @@ public class Students extends ParamClass {
         return StudentString + redirect;
     }
 
-    public String DeleteStudents(int StudentId) {
+    public String DeleteStudents() {
         try {
-            studentsList.remove(StudentId+1);
+            int index = studentsList.size();
+            System.out.println(index);
+            studentsList.remove(index-1);
         } catch (Exception e) {
             return errorMsg + redirect;
         }
@@ -102,12 +103,4 @@ public class Students extends ParamClass {
         }
     }
 
-    private void StudentIdFiler(String id) throws IOException {
-        File Reader = new File("IdStudents.txt");
-            long checker = Reader.length();
-                StudentId = Math.toIntExact(checker+1);
-                FileWriter Writer = new FileWriter("IdStudents.txt", true);
-            Writer.append(id);
-        Writer.close();
-    }
 }
