@@ -4,6 +4,10 @@ import java.util.List;
 
 public class ParamClass {
 
+    /**
+     * This probably is not a good way of doing things at all.
+     */
+
     String redirect = "<a href='http://localhost:8080'><button> Return to main page</button></a>";
     String successMsg = "<h1>Addition was successful </h1>";
     String errorMsg = "<h1>Something went wrong  </h1>";

@@ -5,6 +5,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * registration() register students to courses and save them to file.
+ * GetInfo() return registered students
+ */
 
 public class FilerService extends ParamClass {
 
@@ -23,12 +27,12 @@ public class FilerService extends ParamClass {
 
     public String GetInfo() {
 
-        String data = "";
+        StringBuilder data = new StringBuilder();
         try {
             File Reader = new File("filename.txt");
             Scanner myReader = new Scanner(Reader);
             while (myReader.hasNextLine()) {
-                data += myReader.nextLine();
+                data.append(myReader.nextLine());
             }
             myReader.close();
         } catch (FileNotFoundException e) {

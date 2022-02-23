@@ -1,10 +1,27 @@
 package com.perus.tahmea;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
+/**
+ *  First six functions are basic, two constructors and four getters
+ *
+ *  setCourses() add one number to index file and creates a list of courses for later use
+ *  getCourses() Returns data in readable form
+ *  deleteCourses() works if everytime you use index that starts from beginning
+ *  GetCoursesById() return data to for the filerService
+ *  CourseIdFiler() one, if not very bad way to do auto-incrementation for id. When you start and add new course you continue from the last id.
+ *  did that only because I was bored.
+ */
+
 public class Courses extends ParamClass {
     private String course;
     private String teacher;
     private String classRoom;
-    private int courseId = 1;
+    private int courseId;
+
+
 
     public Courses(String course, String teacher, String classRoom ,int courseId) {
         this.course = course;
@@ -35,10 +52,9 @@ public class Courses extends ParamClass {
 
     public String setCourses(String course, String teacher, String classRoom) {
         try {
-
+                CourseIdFiler(String.valueOf(courseId));
                 Courses C = new Courses(course, teacher,classRoom,courseId);
                 coursesList.add(C);
-                courseId = courseId+1;
                 return successMsg + redirect;
         } catch (Exception e) {
             return errorMsg + redirect;
@@ -48,17 +64,17 @@ public class Courses extends ParamClass {
     public String getCourses() {
         StringBuilder CourseString = new StringBuilder();
         for (Courses e : coursesList) {
-            CourseString.append("<h1>Course Name: </h1>").append(e.getCourse()).append("<br>");
-            CourseString.append("<h1>Teacher name: </h1>").append(e.getTeacher()).append("<br>");
-            CourseString.append("<h1>Classroom: </h1>").append(e.getClassRoom()).append("<br>");
-            CourseString.append("<h1>Course id: </h1>").append(e.getCourseId()).append("<br><br>");
+            CourseString.append("<b>Course Name: </b>").append(e.getCourse()).append("<br>");
+            CourseString.append("<b>Teacher name: </b>").append(e.getTeacher()).append("<br>");
+            CourseString.append("<b>Classroom: </b>").append(e.getClassRoom()).append("<br>");
+            CourseString.append("<b>Course id: </b>").append(e.getCourseId()).append("<br><br>");
         }
         return CourseString + redirect;
     }
 
     public String deleteCourses(int CourseId) {
         try {
-            coursesList.remove(CourseId-1);
+            coursesList.remove(CourseId+1);
         } catch (Exception e) {
             return errorMsg + redirect;
         }
@@ -68,7 +84,6 @@ public class Courses extends ParamClass {
 
     public String GetCourseById(String courseId) {
         try {
-
             int Test = courseId.length();
             if (Test == 0) {
               return "";
@@ -79,13 +94,21 @@ public class Courses extends ParamClass {
                 return "";
             } else {
                 Courses C = coursesList.get(id-1);
-                return "<br>Course Name: " + C.getCourse() + "<br>";
-
+                return "Course Name: " + C.getCourse() + " <br> " + "Classroom: " + C.getClassRoom() +"<br>";
             }
 
         } catch (Exception e) {
             return errorMsg + redirect;
         }
 
+    }
+
+    private void CourseIdFiler(String id) throws IOException {
+        File Reader = new File("IdCourses.txt");
+            long checker = Reader.length();
+                courseId = Math.toIntExact(checker+1);
+                FileWriter Writer = new FileWriter("IdCourses.txt", true);
+            Writer.append(id);
+        Writer.close();
     }
 }
