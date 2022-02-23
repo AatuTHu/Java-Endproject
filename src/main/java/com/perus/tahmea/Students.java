@@ -4,13 +4,13 @@ public class Students extends ParamClass {
 
     private String fname;
     private String lname;
-    private String adress;
-    private int StudentId=0;
+    private String address;
+    private int StudentId=1;
 
-    public Students(String fname, String lname,String adress, int studentId) {
+    public Students(String fname, String lname,String address, int studentId) {
         this.fname = fname;
         this.lname = lname;
-        this.adress = adress;
+        this.address = address;
         this.StudentId = studentId;
     }
 
@@ -27,8 +27,8 @@ public class Students extends ParamClass {
         return lname;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
     public int getStudentId() {
@@ -54,7 +54,7 @@ public class Students extends ParamClass {
         for (Students e : studentsList) {
             StudentString.append("<p>Firstname: </p>").append(e.getFname()).append("<br>");
             StudentString.append("<p>Lastname: </p>").append(e.getLname()).append("<br>");
-            StudentString.append("<p>Adress: </p>").append(e.getAdress()).append("<br>");
+            StudentString.append("<p>Address: </p>").append(e.getAddress()).append("<br>");
             StudentString.append("<p>StudentId: </p>").append(e.getStudentId()).append("<br><br>");
         }
         return StudentString + redirect;
@@ -71,9 +71,20 @@ public class Students extends ParamClass {
 
     public String GetStudentsById(String studentId) {
         try {
+
+            int Test = studentId.length();
+            if (Test == 0) {
+                return "";
+            }
+
             int id = Integer.parseInt(studentId);
-            Students S = studentsList.get(id-1);
-            return "Name of The Student: " + S.getFname();
+            if(id > studentsList.size() || id < studentsList.size()) {
+                return "";
+
+            } else {
+                Students S = studentsList.get(id - 1);
+                return "Name of The Student: " + S.getFname();
+            }
         } catch (Exception e) {
             return parseError + redirect;
         }

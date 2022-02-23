@@ -2,7 +2,6 @@ package com.perus.tahmea;
 
 
 import org.springframework.web.bind.annotation.*;
-
 import java.io.IOException;
 
 
@@ -27,11 +26,12 @@ public class myKahviController {
      *
      * @param fname Students firstname
      * @param lname Students Lastname
+     * @param address Students Address
      * @return success or else
      */
     @PostMapping("addStudents")
-    public String addStudents(@RequestParam String fname, @RequestParam String lname, @RequestParam String adress) {
-        return S.SetStudents(fname,lname,adress);
+    public String addStudents(@RequestParam String fname, @RequestParam String lname, @RequestParam String address) {
+        return S.SetStudents(fname,lname,address);
     }
 
     /**
@@ -62,6 +62,7 @@ public class myKahviController {
      *
      * @param course course name
      * @param teacher Teachers name
+     * @param classRoom course Classroom name
      * @return success or error
      */
     @PostMapping("addCourses")
@@ -96,6 +97,7 @@ public class myKahviController {
      *
      * @param Course_Id which course
      * @param Student_Id which student
+     * @Action files students to file and saves
      * @return success or error
      */
     @PostMapping("Filer")
@@ -107,7 +109,7 @@ public class myKahviController {
 
     /**
      *
-     * @return String data
+     * @return File of students that has been added to courses
      */
     @GetMapping("getFiledStuff")
     public String getFiledStuff() {

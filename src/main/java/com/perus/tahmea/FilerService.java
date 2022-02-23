@@ -7,28 +7,18 @@ import java.util.Scanner;
 
 
 public class FilerService extends ParamClass {
-    private String Students;
-    private String Courses;
-
-
-    public FilerService() {
-
-    }
-
-    public String getStudents() {
-        return Students;
-    }
-
-    public String getCourses() {
-        return Courses;
-    }
 
     public String registration(String Register) throws IOException {
 
+        int Test = Register.length();
+        if (Test == 0) {
+            return errorMsg + redirect;
+        } else {
             FileWriter Writer = new FileWriter("filename.txt", true);
             Writer.append(Register);
             Writer.close();
             return FileSuccess + redirect;
+        }
     }
 
     public String GetInfo() {

@@ -68,9 +68,21 @@ public class Courses extends ParamClass {
 
     public String GetCourseById(String courseId) {
         try {
+
+            int Test = courseId.length();
+            if (Test == 0) {
+              return "";
+            }
+
             int id = Integer.parseInt(courseId);
-            Courses C = coursesList.get(id-1);
-            return "<br>Course Name: " + C.getCourse() + "<br>";
+            if(id > coursesList.size() || id < coursesList.size()) {
+                return "";
+            } else {
+                Courses C = coursesList.get(id-1);
+                return "<br>Course Name: " + C.getCourse() + "<br>";
+
+            }
+
         } catch (Exception e) {
             return errorMsg + redirect;
         }
