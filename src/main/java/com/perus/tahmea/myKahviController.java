@@ -4,8 +4,6 @@ package com.perus.tahmea;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 
 @RestController
@@ -13,7 +11,7 @@ public class myKahviController {
 
     Courses C = new Courses();
     Students S = new Students();
-    StudentToCourse StoC = new StudentToCourse();
+    FilerService StoC = new FilerService();
 
 
     /**
@@ -29,12 +27,11 @@ public class myKahviController {
      *
      * @param fname Students firstname
      * @param lname Students Lastname
-     * @param StudentId studentId
      * @return success or else
      */
     @PostMapping("addStudents")
-    public String addStudents(@RequestParam String fname, @RequestParam String lname, @RequestParam String StudentId) {
-        return S.SetStudents(fname,lname,StudentId);
+    public String addStudents(@RequestParam String fname, @RequestParam String lname, @RequestParam String adress) {
+        return S.SetStudents(fname,lname,adress);
     }
 
     /**
@@ -44,7 +41,12 @@ public class myKahviController {
      */
     @PostMapping("deleteStudents")
     public String deleteStudents(@RequestParam String StudentId) {
-        return S.DeleteStudents(StudentId);
+
+        try {
+            return S.DeleteStudents(Integer.parseInt(StudentId));
+        } catch (Exception e) {
+            return "Id could not be parsed or does not exist";
+        }
     }
 
     /**
@@ -60,12 +62,11 @@ public class myKahviController {
      *
      * @param course course name
      * @param teacher Teachers name
-     * @param CourseId courseId
      * @return success or error
      */
     @PostMapping("addCourses")
-    public String addCourses(@RequestParam String course, @RequestParam String teacher, @RequestParam String CourseId) {
-        return C.setCourses(course,teacher,CourseId);
+    public String addCourses(@RequestParam String course, @RequestParam String teacher, @RequestParam String classRoom) {
+        return C.setCourses(course,teacher,classRoom);
     }
 
     /**
@@ -75,7 +76,11 @@ public class myKahviController {
      */
     @PostMapping("deleteCourses")
     public String deleteCourses(@RequestParam String CourseId) {
-       return C.deleteCourses(CourseId);
+        try {
+            return C.deleteCourses(Integer.parseInt(CourseId));
+        } catch (Exception e) {
+            return "Id could not be parsed or does not exist";
+        }
     }
 
     /**
@@ -93,9 +98,9 @@ public class myKahviController {
      * @param Student_Id which student
      * @return success or error
      */
-    @PostMapping("StudentsToCourses")
-    public String StudentsToCourses(@RequestParam String Course_Id, @RequestParam String Student_Id) throws IOException {
-      String Register =  S.GetStudentbyId(Student_Id);
+    @PostMapping("Filer")
+    public String Filer(@RequestParam String Course_Id, @RequestParam String Student_Id) throws IOException {
+      String Register =  S.GetStudentsById(Student_Id);
       Register += C.GetCourseById(Course_Id);
         return StoC.registration(Register);
     }
@@ -104,8 +109,8 @@ public class myKahviController {
      *
      * @return String data
      */
-    @GetMapping("getStudentsToCourses")
-    public String getStudentstoCourses() {
+    @GetMapping("getFiledStuff")
+    public String getFiledStuff() {
         return StoC.GetInfo();
     }
 }

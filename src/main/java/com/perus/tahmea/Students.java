@@ -4,12 +4,14 @@ public class Students extends ParamClass {
 
     private String fname;
     private String lname;
+    private String adress;
     private int StudentId=0;
 
-    public Students(String fname, String lname) {
+    public Students(String fname, String lname,String adress, int studentId) {
         this.fname = fname;
         this.lname = lname;
-        this.StudentId = StudentId+1;
+        this.adress = adress;
+        this.StudentId = studentId;
     }
 
     public Students(){
@@ -25,53 +27,55 @@ public class Students extends ParamClass {
         return lname;
     }
 
+    public String getAdress() {
+        return adress;
+    }
+
     public int getStudentId() {
         return StudentId;
     }
 
-    public String SetStudents(String fname, String lname, String StudentId) {
+    public String SetStudents(String fname, String lname, String adress) {
         try {
-            int id = Integer.parseInt(StudentId);
-            if (id > studentsList.size() && id < studentsList.size() + 2) {
-                Students S = new Students(fname, lname);
+
+                Students S = new Students(fname, lname,adress, StudentId);
                 studentsList.add(S);
+                StudentId = StudentId+1;
                 return successMsg + redirect;
 
-            } else {
-                return errorMsg + redirect;
-
-            }
-
         } catch (Exception e) {
-            return parseError+ redirect;
+            return errorMsg + redirect;
 
         }
     }
 
     public String GetStudents(){
-        String StudentString = "";
+        StringBuilder StudentString = new StringBuilder();
         for (Students e : studentsList) {
-            StudentString += "<h1>Firstname: </h1>" + e.getFname() + "<br>";
-            StudentString += "<h1>Lastname: </h1>" + e.getLname() + "<br>";
-            StudentString += "<h1>StudentId: </h1>" + e.getStudentId() + "<br><br>";
+            StudentString.append("<p>Firstname: </p>").append(e.getFname()).append("<br>");
+            StudentString.append("<p>Lastname: </p>").append(e.getLname()).append("<br>");
+            StudentString.append("<p>Adress: </p>").append(e.getAdress()).append("<br>");
+            StudentString.append("<p>StudentId: </p>").append(e.getStudentId()).append("<br><br>");
         }
         return StudentString + redirect;
     }
 
-    public String DeleteStudents(String StudentId) {
+    public String DeleteStudents(int StudentId) {
         try {
-            int id = Integer.parseInt(StudentId);
-            studentsList.remove(id - 1);
+            studentsList.remove(StudentId - 1);
         } catch (Exception e) {
             return errorMsg + redirect;
         }
         return deleteMSG + redirect;
     }
 
-    public String GetStudentbyId(String studentId) {
-        int id = Integer.parseInt(studentId);
-        Students S = studentsList.get(id-1);
-        String Student = "Name of The Student: " + S.getFname();
-        return  Student;
+    public String GetStudentsById(String studentId) {
+        try {
+            int id = Integer.parseInt(studentId);
+            Students S = studentsList.get(id-1);
+            return "Name of The Student: " + S.getFname();
+        } catch (Exception e) {
+            return parseError + redirect;
+        }
     }
 }

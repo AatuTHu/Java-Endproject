@@ -3,11 +3,13 @@ package com.perus.tahmea;
 public class Courses extends ParamClass {
     private String course;
     private String teacher;
-    private int courseId;
+    private String classRoom;
+    private int courseId = 1;
 
-    public Courses(String course, String teacher, int courseId) {
+    public Courses(String course, String teacher, String classRoom ,int courseId) {
         this.course = course;
         this.teacher = teacher;
+        this.classRoom = classRoom;
         this.courseId = courseId;
     }
 
@@ -23,39 +25,40 @@ public class Courses extends ParamClass {
         return teacher;
     }
 
+    public String getClassRoom() {
+        return classRoom;
+    }
+
     public int getCourseId() {
         return courseId;
     }
 
-    public String setCourses(String course, String teacher, String CourseId) {
+    public String setCourses(String course, String teacher, String classRoom) {
         try {
-            int id = Integer.parseInt(CourseId);
-            if (id > coursesList.size() && id < coursesList.size() + 2) {
-                Courses C = new Courses(course, teacher, id);
+
+                Courses C = new Courses(course, teacher,classRoom,courseId);
                 coursesList.add(C);
+                courseId = courseId+1;
                 return successMsg + redirect;
-            } else {
-                return errorMsg + redirect;
-            }
         } catch (Exception e) {
-            return parseError + redirect;
+            return errorMsg + redirect;
         }
     }
 
     public String getCourses() {
-        String CourseString = "";
+        StringBuilder CourseString = new StringBuilder();
         for (Courses e : coursesList) {
-            CourseString += "<h1>Course Name: </h1>" + e.getCourse() + "<br>";
-            CourseString += "<h1>Teacher name: </h1>" + e.getTeacher() + "<br>";
-            CourseString += "<h1>Course id: </h1>" + e.getCourseId() + "<br><br>";
+            CourseString.append("<h1>Course Name: </h1>").append(e.getCourse()).append("<br>");
+            CourseString.append("<h1>Teacher name: </h1>").append(e.getTeacher()).append("<br>");
+            CourseString.append("<h1>Classroom: </h1>").append(e.getClassRoom()).append("<br>");
+            CourseString.append("<h1>Course id: </h1>").append(e.getCourseId()).append("<br><br>");
         }
         return CourseString + redirect;
     }
 
-    public String deleteCourses(String CourseId) {
+    public String deleteCourses(int CourseId) {
         try {
-            int id = Integer.parseInt(CourseId);
-            coursesList.remove(id - 1);
+            coursesList.remove(CourseId-1);
         } catch (Exception e) {
             return errorMsg + redirect;
         }
@@ -64,9 +67,13 @@ public class Courses extends ParamClass {
     }
 
     public String GetCourseById(String courseId) {
-        int id = Integer.parseInt(courseId);
-        Courses C = coursesList.get(id-1);
-        String CourseName = "<br>Course Name: " + C.getCourse() + "<br>";
-        return  CourseName;
+        try {
+            int id = Integer.parseInt(courseId);
+            Courses C = coursesList.get(id-1);
+            return "<br>Course Name: " + C.getCourse() + "<br>";
+        } catch (Exception e) {
+            return errorMsg + redirect;
+        }
+
     }
 }
