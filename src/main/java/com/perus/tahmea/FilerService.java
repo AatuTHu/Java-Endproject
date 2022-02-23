@@ -24,7 +24,6 @@ public class FilerService extends ParamClass {
     public String GetInfo() {
 
         String data = "";
-
         try {
             File Reader = new File("filename.txt");
             Scanner myReader = new Scanner(Reader);
