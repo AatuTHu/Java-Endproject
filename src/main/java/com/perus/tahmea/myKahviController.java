@@ -10,7 +10,7 @@ import java.io.IOException;
  *  I could have made another id but in my mind that would be too confusing.
  *
  *  Students and courses are not filed because I think that one filer is enough for this.
- *  Decision to make last index deletion was made because it is just easier than thinking how give students and courses new active id.
+ *  Decision to make last index deletion was made because it is just easier than thinking how to give students and courses new active id.
  *
  *  Everything done in this project was done by me. I had no prior knowledge of java coding other than lectures.
  */
@@ -124,6 +124,11 @@ public class myKahviController {
     @GetMapping("getFiledStuff")
     public String getFiledStuff() {
         return StoC.GetInfo();
+    }
+
+    @GetMapping("deleteFiledStuff")
+    public String deleteFileContent(){
+        return StoC.deleteFileContent();
     }
 }
 

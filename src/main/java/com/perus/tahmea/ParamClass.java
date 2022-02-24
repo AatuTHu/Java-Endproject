@@ -14,6 +14,7 @@ public class ParamClass {
     String emptyDeletionMsg = "<h1>Nothing to be deleted, list is empty </h1>";
     String emptyListMsg = "<h1>There is nothing to show, list is empty</h1>";
     String emptyFileMsg = "<h1>File that you want to read is empty</h1>";
+    String emptyFileDeleteMsg = "<h1>There is nothing to delete on this file</h1>";
     String emptyFilingMsg = "<h1>There is nothing to file or you did not give both ids correctly</h1>";
     String numberCatherMsg = "<h1>I doubt that no one has numbers in their name</h1>";
     String errorMsg = "<h1>Something went wrong  </h1>";
