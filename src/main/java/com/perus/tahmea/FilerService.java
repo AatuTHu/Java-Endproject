@@ -1,4 +1,6 @@
 package com.perus.tahmea;
+import org.springframework.stereotype.Service;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -10,16 +12,18 @@ import java.util.Scanner;
  * GetInfo() return registered students
  */
 
+@Service
 public class FilerService extends ParamClass {
 
-    public String registration(String Register) throws IOException {
 
-        int Test = Register.length();
-        if (Test == 0) {
-            return errorMsg + redirect;
+    public String registration(String info1, String info2) throws IOException {
+
+        if (EmptinessCather(info1) == 0 || EmptinessCather(info2) == 0) {
+            return emptyFilingMsg + redirect;
         } else {
             FileWriter Writer = new FileWriter("filename.txt", true);
-            Writer.append(Register);
+            Writer.append(info1);
+            Writer.append(info2);
             Writer.close();
             return FileSuccess + redirect;
         }
@@ -30,11 +34,16 @@ public class FilerService extends ParamClass {
         StringBuilder data = new StringBuilder();
         try {
             File Reader = new File("filename.txt");
-            Scanner myReader = new Scanner(Reader);
-            while (myReader.hasNextLine()) {
-                data.append(myReader.nextLine());
+
+            if(Reader.length() == 0) {
+                return emptyFileMsg + redirect;
+            } else {
+                Scanner myReader = new Scanner(Reader);
+                while (myReader.hasNextLine()) {
+                    data.append(myReader.nextLine());
+                }
+                myReader.close();
             }
-            myReader.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             return errorMsg + redirect;

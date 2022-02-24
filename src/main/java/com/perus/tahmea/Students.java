@@ -1,20 +1,24 @@
 package com.perus.tahmea;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *  First six functions are basic, two constructors and four getters
  *
- *  SetStudents() add one number to index file and creates a list of students for later use
+ *  SetStudents() creates a list of students for later use
  *  GetStudents() Returns data in readable form
  *  deleteStudents() Delete last addition
  *  GetStudentsById() return data to for the filerService
  *
  */
 
+@Service
 public class Students extends ParamClass {
+
+    List<Students> studentsList = new ArrayList<>();
 
     private String fname;
     private String lname;
@@ -32,7 +36,6 @@ public class Students extends ParamClass {
 
     }
 
-
     public String getFname() {
         return fname;
     }
@@ -49,12 +52,17 @@ public class Students extends ParamClass {
         return StudentId;
     }
 
-    public String SetStudents(String fname, String lname, String adress) {
+    public String SetStudents(String fname, String lname, String address) {
         try {
-                StudentId = StudentId+1;
-                Students S = new Students(fname, lname,adress, StudentId);
+            if(NumberCather(fname) || NumberCather(lname)) {return numberCatherMsg + redirect;}
+                if(EmptinessCather(fname) == 0 || EmptinessCather(lname)==0 || EmptinessCather(address) == 0) {
+                return emptyInput + redirect;
+            } else {
+                StudentId = StudentId + 1;
+                Students S = new Students(fname, lname, address, StudentId);
                 studentsList.add(S);
                 return successMsg + redirect;
+            }
 
         } catch (Exception e) {
             return errorMsg + redirect;
@@ -62,13 +70,18 @@ public class Students extends ParamClass {
         }
     }
 
-    public String GetStudents(){
+    public String GetStudents() {
         StringBuilder StudentString = new StringBuilder();
-        for (Students e : studentsList) {
-            StudentString.append("<b>Firstname: </b>").append(e.getFname()).append("<br>");
-            StudentString.append("<b>Lastname: </b>").append(e.getLname()).append("<br>");
-            StudentString.append("<b>Address: </b>").append(e.getAddress()).append("<br>");
-            StudentString.append("<b>StudentId: </b>").append(e.getStudentId()).append("<br><br>");
+
+        if (studentsList.isEmpty()) {
+            return emptyListMsg + redirect;
+        } else {
+            for (Students e : studentsList) {
+                StudentString.append("<b>Firstname: </b>").append(e.getFname()).append("<br>");
+                StudentString.append("<b>Lastname: </b>").append(e.getLname()).append("<br>");
+                StudentString.append("<b>Address: </b>").append(e.getAddress()).append("<br>");
+                StudentString.append("<b>StudentId: </b>").append(e.getStudentId()).append("<br><br>");
+            }
         }
         return StudentString + redirect;
     }
@@ -76,8 +89,11 @@ public class Students extends ParamClass {
     public String DeleteStudents() {
         try {
             int index = studentsList.size();
-            System.out.println(index);
+
+            if(index == 0) { return emptyDeletionMsg + redirect; }
+
             studentsList.remove(index-1);
+            StudentId = StudentId-1;
         } catch (Exception e) {
             return errorMsg + redirect;
         }
@@ -86,21 +102,22 @@ public class Students extends ParamClass {
 
     public String GetStudentsById(String studentId) {
         try {
-            int Test = studentId.length();
-            if (Test == 0) {
+
+            if (EmptinessCather(studentId) == 0) {
                 return "";
             }
             int id = Integer.parseInt(studentId);
-            if(id > studentsList.size() || id < studentsList.size()) {
-                return "";
 
+            if(id > studentsList.size() || id < 0 ) {
+                return "";
             } else {
-                Students S = studentsList.get(id - 1);
+                Students S = studentsList.get(id-1);
                 return "Name of The Student: " + S.getFname() + " " + S.getLname() + "<br>";
             }
         } catch (Exception e) {
-            return parseError + redirect;
+             return "";
         }
     }
+
 
 }

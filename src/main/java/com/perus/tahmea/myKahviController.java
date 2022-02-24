@@ -101,14 +101,14 @@ public class myKahviController {
      */
     @PostMapping("Filer")
     public String Filer(@RequestParam String Course_Id, @RequestParam String Student_Id) throws IOException {
-      String Register =  S.GetStudentsById(Student_Id);
-      Register += C.GetCourseById(Course_Id);
-        return StoC.registration(Register);
+      String info1 =  S.GetStudentsById(Student_Id);
+      String info2 = C.GetCourseById(Course_Id);
+      return StoC.registration(info1,info2);
     }
 
     /**
      *
-     * @return File of students that has been added to courses
+     * @return File of students that have been added to courses
      */
     @GetMapping("getFiledStuff")
     public String getFiledStuff() {
