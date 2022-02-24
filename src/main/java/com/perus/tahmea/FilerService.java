@@ -18,9 +18,9 @@ public class FilerService extends ParamClass {
 
     public String registration(String info1, String info2) throws IOException {
 
-        if (EmptinessCather(info1) == 0 || EmptinessCather(info2) == 0) {
+        if (EmptinessCather(info1) == 0 || EmptinessCather(info2) == 0) { //if the string deliver are empty, then nothing can be done
             return emptyFilingMsg + redirect;
-        } else {
+        } else { //write info to file
             FileWriter Writer = new FileWriter("filename.txt", true);
             Writer.append(info1);
             Writer.append(info2);
@@ -35,9 +35,9 @@ public class FilerService extends ParamClass {
         try {
             File Reader = new File("filename.txt");
 
-            if(Reader.length() == 0) {
+            if(Reader.length() == 0) { //if file is empty, return info
                 return emptyFileMsg + redirect;
-            } else {
+            } else { //read what is written
                 Scanner myReader = new Scanner(Reader);
                 while (myReader.hasNextLine()) {
                     data.append(myReader.nextLine());

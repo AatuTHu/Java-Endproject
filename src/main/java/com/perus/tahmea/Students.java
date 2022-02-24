@@ -54,10 +54,11 @@ public class Students extends ParamClass {
 
     public String SetStudents(String fname, String lname, String address) {
         try {
-            if(NumberCather(fname) || NumberCather(lname)) {return numberCatherMsg + redirect;}
-                if(EmptinessCather(fname) == 0 || EmptinessCather(lname)==0 || EmptinessCather(address) == 0) {
+            if(NumberCather(fname) || NumberCather(lname)) { //we do not accept names with numbers
+                return numberCatherMsg + redirect;
+            } else if(EmptinessCather(fname) == 0 || EmptinessCather(lname)==0 || EmptinessCather(address) == 0) { // check if the inputs are empty
                 return emptyInput + redirect;
-            } else {
+            } else { //add students to list and auto-increment id for usage in other functions
                 StudentId = StudentId + 1;
                 Students S = new Students(fname, lname, address, StudentId);
                 studentsList.add(S);
@@ -73,10 +74,10 @@ public class Students extends ParamClass {
     public String GetStudents() {
         StringBuilder StudentString = new StringBuilder();
 
-        if (studentsList.isEmpty()) {
+        if (studentsList.isEmpty()) { //check if the list is empty.
             return emptyListMsg + redirect;
         } else {
-            for (Students e : studentsList) {
+            for (Students e : studentsList) { // make a readable string of student currently on list
                 StudentString.append("<b>Firstname: </b>").append(e.getFname()).append("<br>");
                 StudentString.append("<b>Lastname: </b>").append(e.getLname()).append("<br>");
                 StudentString.append("<b>Address: </b>").append(e.getAddress()).append("<br>");
@@ -88,32 +89,32 @@ public class Students extends ParamClass {
 
     public String DeleteStudents() {
         try {
-            int index = studentsList.size();
 
-            if(index == 0) { return emptyDeletionMsg + redirect; }
-
-            studentsList.remove(index-1);
-            StudentId = StudentId-1;
+            if(studentsList.isEmpty()) { //check if the list is empty
+                return emptyDeletionMsg + redirect;
+            }else{ // remove last student on the list and set student id -1 so next registered student is in chronological order
+                studentsList.remove(studentsList.size() - 1);
+                StudentId = StudentId - 1;
+            }
         } catch (Exception e) {
             return errorMsg + redirect;
         }
-        return deleteMSG + redirect;
+            return deleteMSG + redirect;
     }
 
     public String GetStudentsById(String studentId) {
         try {
-
-            if (EmptinessCather(studentId) == 0) {
-                return "";
-            }
             int id = Integer.parseInt(studentId);
 
-            if(id > studentsList.size() || id < 0 ) {
+            if (EmptinessCather(studentId) == 0){  //check if the input was empty
                 return "";
-            } else {
-                Students S = studentsList.get(id-1);
-                return "Name of The Student: " + S.getFname() + " " + S.getLname() + "<br>";
-            }
+                    }else if(id > studentsList.size() || id < 0 ) { //check that the id given is not too high or low
+                        return "";
+                            }else{ // get student information based on passed id
+                                Students S = studentsList.get(id-1);
+                                return "Name of The Student: " + S.getFname() + " " + S.getLname() + "<br>";
+                }
+
         } catch (Exception e) {
              return "";
         }

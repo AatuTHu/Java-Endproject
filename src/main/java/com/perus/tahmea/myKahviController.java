@@ -4,6 +4,17 @@ package com.perus.tahmea;
 import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 
+/**
+ *  id given to new students is active, it only lasts for the time that the program is running.
+ *  I didn't figure out a way to use it for lasting purposes other than cosmetic.
+ *  I could have made another id but in my mind that would be too confusing.
+ *
+ *  Students and courses are not filed because I think that one filer is enough for this.
+ *  Decision to make last index deletion was made because it is just easier than thinking how give students and courses new active id.
+ *
+ *  Everything done in this project was done by me. I had no prior knowledge of java coding other than lectures.
+ */
+
 
 @RestController
 public class myKahviController {
