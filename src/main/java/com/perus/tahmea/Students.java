@@ -64,10 +64,25 @@ public class Students extends ParamClass {
                 studentsList.add(S);
                 return successMsg + redirect;
             }
-
         } catch (Exception e) {
             return errorMsg + redirect;
+        }
+    }
 
+    public String UpdateStudents(String fname, String lname, String address) {
+        try {
+            if(NumberCather(fname) || NumberCather(lname)) { //we do not accept names with numbers
+                return numberCatherMsg + redirect;
+            } else if(EmptinessCather(fname) == 0 || EmptinessCather(lname)==0 || EmptinessCather(address) == 0) { // check if the inputs are empty
+                return emptyInput + redirect;
+            } else { //update students to list
+                studentsList.remove(studentsList.size()-1);
+                Students S = new Students(fname, lname, address, StudentId);
+                studentsList.add(S);
+                return updateSuccessMsg + redirect;
+            }
+        } catch (Exception e) {
+            return errorMsg + redirect;
         }
     }
 

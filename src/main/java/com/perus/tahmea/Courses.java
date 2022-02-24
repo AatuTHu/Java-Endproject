@@ -9,6 +9,7 @@ import java.util.List;
  *  First six functions are basic, two constructors and four getters
  *
  *  setCourses() creates a list of courses for later use
+ *  updateCourses() updates last courses that was added
  *  getCourses() Returns data in readable form
  *  deleteCourses() delete last addition
  *  GetCoursesById() return data to for the filerService
@@ -65,6 +66,23 @@ public class Courses extends ParamClass {
                 Courses C = new Courses(course, teacher, classRoom, courseId);
                 coursesList.add(C);
                 return successMsg + redirect;
+            }
+        } catch (Exception e) {
+            return errorMsg + redirect;
+        }
+    }
+
+    public String updateCourses(String course, String teacher, String classRoom) {
+        try {
+            if(NumberCather(teacher)) { //we do not accept names with numbers
+                return numberCatherMsg + " <h1>( teachers name )<h1>" + redirect;
+            } else if(EmptinessCather(course) == 0 || EmptinessCather(teacher)==0 || EmptinessCather(classRoom) == 0) { // check if the inputs are empty
+                return emptyInput + redirect;
+            } else { //update courses to list
+                coursesList.remove(coursesList.size()-1);
+                Courses C = new Courses(course, teacher, classRoom, courseId);
+                coursesList.add(C);
+                return updateSuccessMsg + redirect;
             }
         } catch (Exception e) {
             return errorMsg + redirect;

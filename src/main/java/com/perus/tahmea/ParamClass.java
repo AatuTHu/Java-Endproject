@@ -10,6 +10,7 @@ public class ParamClass {
 
     String redirect = "<a href='http://localhost:8080'><button> Return to main page</button></a>";
     String successMsg = "<h1>Addition was successful </h1>";
+    String updateSuccessMsg = "<h1>Update was success full</h1>";
     String emptyInput = "<h1>You must give all the information, otherwise nothing will be done</h1>";
     String emptyDeletionMsg = "<h1>Nothing to be deleted, list is empty </h1>";
     String emptyListMsg = "<h1>There is nothing to show, list is empty</h1>";

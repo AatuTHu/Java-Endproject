@@ -45,6 +45,11 @@ public class myKahviController {
         return S.SetStudents(fname,lname,address);
     }
 
+    @PostMapping("updateStudents")
+    public String updateStudents(@RequestParam String fname, @RequestParam String lname, @RequestParam String address) {
+        return  S.UpdateStudents(fname,lname,address);
+    }
+
     /**
      *
      * Delete last index on list
@@ -80,6 +85,10 @@ public class myKahviController {
         return C.setCourses(course,teacher,classRoom);
     }
 
+    @PostMapping("updateCourses")
+    public String updateCourses(@RequestParam String course, @RequestParam String teacher, @RequestParam String classRoom) {
+        return C.updateCourses(course,teacher,classRoom);
+    }
     /**
      *
      * Delete last index
