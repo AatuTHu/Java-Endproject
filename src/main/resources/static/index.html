@@ -71,15 +71,22 @@
         </div>
 
         <div class="containerItems">
-            <h2>Delete Last added student</h2>
-            <form method="post" action="http://localhost:8080/deleteStudents">
+            <h2>Delete last added student</h2>
+            <form action="http://localhost:8080/deleteStudents">
                 <input type="submit" value="Delete">
             </form>
         </div>
 
         <div class="containerItems">
             <h2>Delete last added Course</h2>
-            <form method="post" action="http://localhost:8080/deleteCourses">
+            <form action="http://localhost:8080/deleteCourses">
+                <input type="submit" value="Delete">
+            </form>
+        </div>
+
+        <div class="containerItems">
+            <h2>Delete filed content</h2>
+            <form action="http://localhost:8080/deleteFiledStuff">
                 <input type="submit" value="Delete">
             </form>
         </div>
@@ -94,9 +101,6 @@
             </form>
             <form action="http://localhost:8080/getFiledStuff">
                 <input type="submit" value="See Students That are already on Courses" />
-            </form>
-            <form action="http://localhost:8080/deleteFiledStuff">
-                <input type="submit" value="Delete filed content" />
             </form>
         </div>
 

@@ -55,7 +55,7 @@ public class myKahviController {
      * Delete last index on list
      * @return success or error
      */
-    @PostMapping("deleteStudents")
+    @GetMapping("deleteStudents")
     public String deleteStudents() {
         try {
             return S.DeleteStudents();
@@ -94,7 +94,7 @@ public class myKahviController {
      * Delete last index
      * @return success or error
      */
-    @PostMapping("deleteCourses")
+    @GetMapping("deleteCourses")
     public String deleteCourses() {
         try {
             return C.deleteCourses();

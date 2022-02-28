@@ -20,6 +20,7 @@ public class Students extends ParamClass {
 
     List<Students> studentsList = new ArrayList<>();
 
+
     private String fname;
     private String lname;
     private String address;
@@ -77,7 +78,7 @@ public class Students extends ParamClass {
                 return emptyInput + redirect;
             } else { //update students to list
                 studentsList.remove(studentsList.size()-1);
-                Students S = new Students(fname, lname, address, StudentId);
+                Students S =  new Students(fname, lname, address, StudentId);
                 studentsList.add(S);
                 return updateSuccessMsg + redirect;
             }
@@ -114,7 +115,7 @@ public class Students extends ParamClass {
         } catch (Exception e) {
             return errorMsg + redirect;
         }
-            return deleteMSG + redirect;
+        return deleteMSG + redirect;
     }
 
     public String GetStudentsById(String studentId) {
