@@ -17,7 +17,7 @@ import java.io.IOException;
 
 
 @RestController
-public class myKahviController {
+public class myTahmeaController {
 
     Courses C = new Courses();
     Students S = new Students();
@@ -57,11 +57,7 @@ public class myKahviController {
      */
     @GetMapping("deleteStudents")
     public String deleteStudents() {
-        try {
             return S.DeleteStudents();
-        } catch (Exception e) {
-            return "Id could not be parsed or does not exist";
-        }
     }
 
     /**
@@ -96,11 +92,7 @@ public class myKahviController {
      */
     @GetMapping("deleteCourses")
     public String deleteCourses() {
-        try {
             return C.deleteCourses();
-        } catch (Exception e) {
-            return "Id could not be parsed or does not exist";
-        }
     }
 
     /**

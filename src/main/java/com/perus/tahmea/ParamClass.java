@@ -14,6 +14,7 @@ public abstract class ParamClass {
     public String emptyInput = "<h1>You must give all the information, otherwise nothing will be done</h1>";
     public String emptyDeletionMsg = "<h1>Nothing to be deleted, list is empty </h1>";
     public String emptyListMsg = "<h1>There is nothing to show, list is empty</h1>";
+    public String emptyUpdateListMsg = "<h1>The list you are updating is empty</h1>";
     public String emptyFileMsg = "<h1>File that you want to read is empty</h1>";
     public String emptyFileDeleteMsg = "<h1>There is nothing to delete on this file</h1>";
     public String emptyFilingMsg = "<h1>There is nothing to file or you did not give both ids correctly</h1>";

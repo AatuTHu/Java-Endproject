@@ -73,7 +73,9 @@ public class Courses extends ParamClass {
 
     public String updateCourses(String course, String teacher, String classRoom) {
         try {
-            if(NumberCather(teacher)) { //we do not accept names with numbers
+            if(coursesList.isEmpty()) {
+                return emptyUpdateListMsg + redirect;
+            }else if(NumberCather(teacher)) { //we do not accept names with numbers
                 return numberCatherMsg + " <h1>( teachers name )<h1>" + redirect;
             } else if(EmptinessCather(course) == 0 || EmptinessCather(teacher)==0 || EmptinessCather(classRoom) == 0) { // check if the inputs are empty
                 return emptyInput + redirect;

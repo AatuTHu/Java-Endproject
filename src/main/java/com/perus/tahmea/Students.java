@@ -1,5 +1,6 @@
 package com.perus.tahmea;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -71,7 +72,9 @@ public class Students extends ParamClass {
 
     public String UpdateStudents(String fname, String lname, String address) {
         try {
-            if(NumberCather(fname) || NumberCather(lname)) { //we do not accept names with numbers
+            if(studentsList.isEmpty()) { //check if the list is empty
+                return emptyUpdateListMsg + redirect;
+            }else if(NumberCather(fname) || NumberCather(lname)) { //we do not accept names with numbers
                 return numberCatherMsg + redirect;
             } else if(EmptinessCather(fname) == 0 || EmptinessCather(lname)==0 || EmptinessCather(address) == 0) { // check if the inputs are empty
                 return emptyInput + redirect;
@@ -104,7 +107,6 @@ public class Students extends ParamClass {
 
     public String DeleteStudents() {
         try {
-
             if(studentsList.isEmpty()) { //check if the list is empty
                 return emptyDeletionMsg + redirect;
             }else{ // remove last student on the list and set student id -1 so next registered student is in chronological order
