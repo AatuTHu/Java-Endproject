@@ -19,7 +19,7 @@ import java.util.List;
 @Service
 public class Courses extends ParamClass {
 
-    List<Courses> coursesList = new ArrayList<>();
+    private final List<Courses> coursesList = new ArrayList<>();
 
     private String course;
     private String teacher;

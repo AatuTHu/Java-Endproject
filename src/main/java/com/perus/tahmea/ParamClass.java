@@ -1,6 +1,6 @@
 package com.perus.tahmea;
 
-public class ParamClass {
+public abstract class ParamClass {
 
     /**
      * This probably is not a good way of doing things at all.

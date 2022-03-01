@@ -18,8 +18,7 @@ import java.util.List;
 @Service
 public class Students extends ParamClass {
 
-    List<Students> studentsList = new ArrayList<>();
-
+    private List<Students> studentsList = new ArrayList<>();
 
     private String fname;
     private String lname;

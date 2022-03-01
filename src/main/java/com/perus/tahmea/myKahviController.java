@@ -12,7 +12,7 @@ import java.io.IOException;
  *  Students and courses are not filed because I think that one filer is enough for this.
  *  Decision to make last index deletion was made because it is just easier than thinking how to give students and courses new active id.
  *
- *  Everything done in this project was done by me. I had no prior knowledge of java coding other than lectures.
+ *  Everything in this project was done by me. I had no prior knowledge of java coding other than lectures.
  */
 
 
