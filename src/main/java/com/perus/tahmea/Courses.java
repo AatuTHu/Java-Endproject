@@ -27,7 +27,6 @@ public class Courses extends ParamClass {
     private int courseId=0;
 
 
-
     public Courses(String course, String teacher, String classRoom ,int courseId) {
         this.course = course;
         this.teacher = teacher;
@@ -39,19 +38,19 @@ public class Courses extends ParamClass {
 
     }
 
-    public String getCourse() {
+    private String getCourse() {
         return course;
     }
 
-    public String getTeacher() {
+    private String getTeacher() {
         return teacher;
     }
 
-    public String getClassRoom() {
+    private String getClassRoom() {
         return classRoom;
     }
 
-    public int getCourseId() {
+    private int getCourseId() {
         return courseId;
     }
 
@@ -136,6 +135,5 @@ public class Courses extends ParamClass {
         }
 
     }
-
 
 }

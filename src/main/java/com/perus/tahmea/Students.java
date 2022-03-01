@@ -36,19 +36,19 @@ public class Students extends ParamClass {
 
     }
 
-    public String getFname() {
+    private String getFname() {
         return fname;
     }
 
-    public String getLname() {
+    private String getLname() {
         return lname;
     }
 
-    public String getAddress() {
+    private String getAddress() {
         return address;
     }
 
-    public int getStudentId() {
+    private int getStudentId() {
         return StudentId;
     }
 
